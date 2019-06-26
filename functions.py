@@ -1,6 +1,7 @@
 def welch_t(a, b):
-    
+    import numpy as np
     """ Calculate Welch's t statistic for two samples. """
+    """ a and b inputs are series"""
 
     numerator = a.mean() - b.mean()
     
@@ -13,8 +14,9 @@ def welch_t(a, b):
 
 
 def welch_df(a, b):
-    
+    import numpy as np
     """ Calculate the effective degrees of freedom for two samples. """
+    """ a and b inputs are series"""
     
     s1 = a.var(ddof=1) 
     s2 = b.var(ddof=1)
@@ -28,8 +30,10 @@ def welch_df(a, b):
 
 
 def p_value(a, b, two_sided=False):
-    
-    """ Calculate the p value of the samples"""
+    from scipy import stats
+    import numpy as np
+    """ Calculate the p value of the samples"""    
+    """ a and b inputs are series"""
 
     t = welch_t(a, b)
     df = welch_df(a, b)
@@ -40,3 +44,9 @@ def p_value(a, b, two_sided=False):
         return 2*p
     else:
         return p
+
+def compare_p_value_and_alpha(p_value, alpha):
+    if p_value > alpha:
+        print("Based on the alpha value we've set, we cannot reject the null hypothesis")
+    else:
+        print("Based on the alpha value we've set, we can reject the null hypothesis and accept the alternative hypothesis")
