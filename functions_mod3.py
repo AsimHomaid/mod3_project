@@ -1,7 +1,7 @@
 def import_data(db_name, file_df):
     """import database and put it in a dataframe"""
     import psycopg2
-    import pandas as pd
+    import pandas as pd 
     conn = psycopg2.connect("dbname='musicdb'user='flatironschool'")
     c = conn.cursor()
     c.execute(f'''select * from {db_name}''')
